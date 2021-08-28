@@ -11,22 +11,22 @@ public class NotebookBookmarkNavigationUI : NotebookUIChild
     [Tooltip("Parent object for all navigation buttons")]
     private Transform buttonParent;
 
-    protected override void Awake()
+    public override void Setup()
     {
-        base.Awake();
+        base.Setup();
 
         // Create a bookmark for each bookmark currently in the notebook
         // NOTE: doesn't work because the bookmarks can't be serialized - they lose their base type
         // Probably wouldn't work on the client't end anyways, there must be some way to associate
         // it with the player's account or something
-        for (int i = 0; i < UIParent.NotebookModel.Bookmarks.Count; i++)
+        for (int i = 0; i < UIParent.Notebook.Bookmarks.Count; i++)
         {
-            CreateBookmarkButton(UIParent.NotebookModel.Bookmarks[i]);
+            CreateBookmarkButton(UIParent.Notebook.Bookmarks[i]);
         }
     }
 
     // When a new bookmark is created, then instantiate a new button for it
-    public void CreateBookmarkButton(NotebookBookmark newBookmark)
+    public void CreateBookmarkButton(Bookmark newBookmark)
     {
         NotebookBookmarkNavigateButton clone = Instantiate(buttonPrefab, buttonParent);
         clone.Setup(newBookmark);

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52e53c4d2142814a94f3088eec699e5, type: 3}
+  m_Name: CowEncyclopedia
+  m_EditorClassIdentifier: 
+  articlesList:
+  - id:
+      title: Ecological Summary - Eligans Impar
+      author: 
+    text: "Dubbed Eligans Impar, this particular genus of cows unique to Planet X
+      present with many similarities to terran cattle. Herds of these space cows
+      have horns and cloven hooves, engage in cud chewing, and prefer isolation from
+      other species. Stocking density, the number of animals within a specified area,
+      is presumed to have strict requirements. \r\n\nEligans Impar are exclusively
+      herbivores, competing over food sources with CapraX Zeigrun. Unlike their goat
+      companions, space cows were not observed with predatory tendencies. Herds have
+      been recorded at Caloris Basin, Marineris Grasslands, and the outskirts of
+      the Pastillion Mountain Range."
+    sprites: []
+  - id:
+      title: Transport Log
+      author: Barry Wachmann
+    text: "I thought this gig was going to be easier, honestly. I\u2019m on the second
+      group of cattle-type species from Planet X. Dr. Star has labeled them...eligans
+      impar? Like an impala, I guess. They looked like cows, at first. As I started
+      to feed them, I quickly realized they\u2019re nothing like Terran cows. They
+      didn\u2019t even want to eat some hay we prepared! Stubborn things only wanted
+      what we were giving the space goats. Y\u2019know, I swear to the gods, I thought
+      I heard one talk. I mean, it was probably just a moo. And we\u2019ve been travelling
+      understaffed with so many endangered species, I\u2019m sure I\u2019m hearing
+      things."
+    sprites:
+    - {fileID: 21300000, guid: d930a59c551c9d84fba833c623d6c1e1, type: 3}
+  - id:
+      title: Observation Log Session #12
+      author: Juno Fornax
+    text: If I thought golden trees were weird...wow. A herd of approximately 20
+      Eligans Impar finally allowed me to approach within 10 feet. After 3 observation
+      sessions and 5 different encounters with this specific herd, they seem to be
+      more open. Almost like canines, the cows would often tilt their heads and sniff
+      my extremities. They do not appear to have interacted with other human(oid)s,
+      which aligns with the lack of intelligent peoples thus far.
+    sprites:
+    - {fileID: 21300000, guid: 03009ada22174a140a929dc54e9838f3, type: 3}
+  - id:
+      title: Research Abstract
+      author: Dr. Aurora Star
+    text: 'Cow-moo-nication: Lack of Eligans Impar Vocalization
+
+
+
+      Previous
+      research shows that Terran mothers and calves show individuality in vocalizations.
+      Natura Serva 22 has isolated five sets of mothers and calves. As found in Terran
+      cattle, it is highly likely that these cows will be able to recognize other
+      members of their herd through vocalizations. However, current acoustic analyses
+      programs have not detected any vocalization from this set. Other enclosures
+      have reported similar silence from their individual herds. Natura Serva 22
+      will begin integrating vocal cue studies in all Eligans Impar enclosures to
+      observe the degree to which the cattle do or do not vocalize. The herds do
+      appear to interact with each other and behave similarly to Terran cows, which
+      suggests an alternative method of communication.'
+    sprites:
+    - {fileID: 21300000, guid: 324041bda96dbcf4ba3dea3986e15817, type: 3}

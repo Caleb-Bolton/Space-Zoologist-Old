@@ -8,12 +8,12 @@ public class NotebookAcronymEditor : NotebookUIChild
     [Tooltip("Reference to the prefab of acronym note editors to instantiate")]
     private NotebookAcronymSingleNoteEditor noteEditorPrefab;
 
-    protected override void Awake()
+    public override void Setup()
     {
-        base.Awake();
+        base.Setup();
 
         // Create all UI elements that edit each character in the acronym
-        foreach(char c in UIParent.NotebookModel.Acronym)
+        foreach(char c in UIParent.Notebook.Acronym)
         {
             NotebookAcronymSingleNoteEditor clone = Instantiate(noteEditorPrefab, transform);
             clone.Setup(c);

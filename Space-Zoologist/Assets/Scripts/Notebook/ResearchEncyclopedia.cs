@@ -22,7 +22,7 @@ public class ResearchEncyclopedia : ScriptableObject
         foreach(ResearchEncyclopediaArticle article in articlesList)
         {
             article.Setup();
-            articles.Add(article.ID, article);
+            if (!articles.ContainsKey(article.ID)) articles.Add(article.ID, article);
         }
     }
     // Get the article with the given ID

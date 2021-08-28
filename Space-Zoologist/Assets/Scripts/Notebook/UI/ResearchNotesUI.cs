@@ -7,7 +7,7 @@ using TMPro;
 public class ResearchNotesUI : NotebookUIChild
 {
     // Current notes to edit
-    public ResearchNotes CurrentNotes => UIParent.NotebookModel.NotebookResearch.GetEntry(categoryPicker.SelectedCategory).Notes;
+    public ResearchNotes CurrentNotes => UIParent.Notebook.Research.GetEntry(categoryPicker.SelectedCategory).Notes;
 
     [SerializeField]
     [Tooltip("Reference to the picker object that selects the research category")]
@@ -20,9 +20,9 @@ public class ResearchNotesUI : NotebookUIChild
     private TextMeshProUGUI titleText;
 
     // Start is called before the first frame update
-    protected override void Awake()
+    public override void Setup()
     {
-        base.Awake();
+        base.Setup();
 
         // Call the method when the input field ends edit
         notesInputField.onEndEdit.AddListener(OnNoteValueChanged);
@@ -38,7 +38,7 @@ public class ResearchNotesUI : NotebookUIChild
     private void OnResearchCategoryChanged(ResearchCategory newCategory)
     {
         // Set the title text to the name of the category
-        titleText.text = categoryPicker.SelectedCategory.Name;
+        titleText.text = categoryPicker.SelectedCategory.Name + ": Target Specifications";
 
         // Set the text on the input field to the text in the notes of the current entry
         notesInputField.SetTextWithoutNotify(CurrentNotes.Notes);

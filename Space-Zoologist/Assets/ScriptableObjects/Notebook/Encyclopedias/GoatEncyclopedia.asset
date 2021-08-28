@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52e53c4d2142814a94f3088eec699e5, type: 3}
+  m_Name: GoatEncyclopedia
+  m_EditorClassIdentifier: 
+  articlesList:
+  - id:
+      title: Ecological Summary - CapraX Zeigrun
+      author: 
+    text: "Rescue teams found strange space goats, later named CapraX Zeigrun, in
+      the middle and lower regions of the Pastillion Mountain Range, {where the terrain
+      was noted to be a combination of dirt and grass.} \r\n\r\nThe middle and lower
+      parts of the Pastillion Mountain Range supported few plant species, the most
+      common being space maple trees, Candentis Acernis. Researchers noted that a
+      single goat would consume anywhere from five to eight of the maple fruit a
+      day. The fruit produced was observed to be approximately kiwi-sized. \r"
+    sprites:
+    - {fileID: 21300000, guid: 0b903780f4e02ab4fb42cd770a10c9be, type: 3}
+  - id:
+      title: Transport Log
+      author: Barry Wachmann
+    text: "These goats are the cutest thing I have ever seen. They\u2019re freaking
+      blue. I mean, what makes a goat blue? Its food? God, I wish I could have seen
+      PlanetX before it blew up. Wonder what else was on there\u2026 \r\n\r\nAnyways,
+      yeah, transport log notes! At 11:23:60, we ran out of maple fruit. The rest
+      is under strict cryofreeze or something. So, instead, they gave us some berries
+      they found on-planet. The goats seem to like them, just a little less. I tried
+      to give them a mushroom, but the face it made was unhappy, to say the least.
+      \r\n\r\nThese things barely eat, though, just like one fruit every four hours.
+      Bet I could lose weight if I ate these things.\r"
+    sprites:
+    - {fileID: 21300000, guid: c9488a7c8dbe80e4d9a76a2b825520c7, type: 3}
+    - {fileID: 21300000, guid: 1f0567b02363586449af03094c41e6be, type: 3}
+  - id:
+      title: Observation Log Session #46
+      author: Dr. Aurora Star
+    text: "<b>June 6th, 3020, 6:00 am</b>\r\nLocated at the bottom of the eastern
+      edge of the Pastillion Mountain Range, in observation site A. Observation session
+      #46 goals: 1) account for the various population sizes migrating and 2) update
+      the liquid requirements database. Observation schedule is set to every 30 minutes,
+      and will reduce to every 10 minutes when a population has been spotted. \r\n\r\n<b>June
+      6th, 3020, 6:30 am</b>\r\nNo signs of goat migration, but the planet\u2019s
+      sunrise created flashes of color on the filled basin as it rose behind me.
+      I never get tired of watching the maple clusters change color from a dreary
+      gray to vibrant purple in 8 hour cycles.\r\n\r\n<b>June 6th, 3020, 7:05 am</b>\r\nI
+      observed the first goat population emerge from the now vibrant maple. Total
+      of 12 goats were sighted. Observation session #46 aligns with previous log
+      data. 10-14 goats appear to be standard population size. 20-30 maple trees
+      per herd.\r\n\r\n<b>June 6th, 3020, 7:15 am\r</b>\nA total of 3 different populations
+      are currently spread around the perimeter of the lake. On the far left is the
+      most recent population observed, with 6 goats total. The herd moved at a comparatively
+      sluggish pace. They originated from the south eastern edge of the Pastillion
+      Basin, noted for its distinct lack of grasslands. The population features 12
+      goats in the middle consuming the lake\u2019s liquid and space maple fruit.
+      The population furthest from me features 8 goats, still below the estimated
+      average population. There are very few local space maples in their grazing
+      area, but they appear to instead be eating some sort of berries. Range of 6-12
+      goats per herd may change standard population size estimates.\r\n"
+    sprites: []
+  - id:
+      title: Research Abstract
+      author: Dr. Aurora Star
+    text: "<b>Population status, threats, and conservation of the CapraX Zeigrun</b>\r\n\r\nThe
+      space goat, CapraX Zeigrun, previously resided in the Pastillion Mountain Range
+      on Planet X, now extinct. The planet\u2019s destruction has led to ex-situ,
+      or off-site, conservation, instead of originally planned in-situ, or on-site,
+      restoration. Four space goats are currently in rehabilitation in the international
+      nature preservation, Natura Serva 22, under care of a team of Planet X researchers.
+      Its original habitat supported grasslands and rocky, dirt mountain terrain.
+      Herds of approximately 10-14 goats migrated in an anomalous pattern around
+      the basin\u2019s central freshwater lake. The average number of space maples,
+      Candentis Acernis, within range of the herd were approximately 20-30. Current
+      measures attempt to approximate the Pastillion Mountain Range\u2019s natural
+      flora and fauna from rescued species samples. \r"
+    sprites:
+    - {fileID: 21300000, guid: 949870f45ff2f0d4098a993db2a54705, type: 3}
+    - {fileID: 21300000, guid: 212bb2f77a4d5f146a99cbc13b4732b7, type: 3}

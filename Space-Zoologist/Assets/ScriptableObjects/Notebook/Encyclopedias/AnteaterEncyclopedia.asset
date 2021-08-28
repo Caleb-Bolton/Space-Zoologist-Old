@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52e53c4d2142814a94f3088eec699e5, type: 3}
+  m_Name: AnteaterEncyclopedia
+  m_EditorClassIdentifier: 
+  articlesList:
+  - id:
+      title: Ecological Summary - Ligurio Vermis
+      author: 
+    text: "The voracious Ligurio Vermis is a species of mammal whose prominent characteristic
+      is an elongated snout with a thin tongue. Ligurio Vermis, despite its lengthy
+      tongue, has a tube-shaped mouth with lips, but no teeth. Thus preferring softer
+      prey and flora for consumption, \r\n\r\nLigurio Vermis appears to require 6-8
+      food sources per day. Ligurio Vermis ranges in size between 2.2 and 2.8 meters
+      in length, with a correspondingly high requisite of territory and water sources."
+    image: {fileID: 0}
+  - id:
+      title: Transport Log
+      author: Barry Wachmann
+    text: "Okay, I know Dr. Star said to be more formal, but Ligurio Vermis is just
+      like my college mascot! Their snouts are a bit different, but they are from
+      space, so... Anyways.\r\n\r\nLigurio Vermis\u2019 food preference during transportation
+      appears to be fruit from Vaccinum Spatium Bacca. Like most other Planet X fauna,
+      they also accept Candentis Acernis fruits. Given their overall shape, size,
+      and observed behaviors, they align with terran anteater expectations and consume
+      ant colonies as well."
+    image: {fileID: 0}
+  - id:
+      title: Observation Log
+      author: Dr. Aurora Star
+    text: "April 15, 3020, 9:05 am\r\nLigurio Vermis sighted in the Alderson Steppe.
+      No sightings in the Atacail Desert or Pastillion Mountain Range. Unknown habitation
+      in Cairgoln Lake and surrounding swamp areas. \r\n\r\nApril 15, 3020, 9:40
+      am\r\nObserved a candle of Ligurio Vermis descend upon a cluster of Thalassius
+      Succo. Survivors retreated into the main source of Thalassius Succo, which
+      appears to be further hidden in rocky terrain impassable by larger creatures.
+      No notable interactions with other species thus far."
+    image: {fileID: 0}
+  - id:
+      title: Research Abstract
+      author: Juno Fornax
+    text: "Planet X Fauna\u2019s Unusual Resemblance to Terran Species\r\n\r\nWhile
+      terran anteaters are aptly predators to ants, Planet X\u2019s anteater-like
+      species, Ligurio Vermis, is a predator to Thalassius Succo, a spider-like species.
+      Classifications of Planet X\u2019s flora and fauna reliant on terran classification
+      are misleading, and often incorrect. However, their outward physical appearance
+      is undeniable. Further research is required to investigate both terran and
+      Planet X\u2019s similar species, such as their liquid composition needs and
+      space requirements. Ligurio Vermis appears suited to less strict pure water
+      and minimal bacteria needs, unlike most other mammals from Planet X."
+    image: {fileID: 0}

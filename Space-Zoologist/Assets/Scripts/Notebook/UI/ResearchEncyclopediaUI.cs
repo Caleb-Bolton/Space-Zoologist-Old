@@ -8,7 +8,7 @@ using TMPro;
 
 public class ResearchEncyclopediaUI : NotebookUIChild
 {
-    public ResearchEncyclopedia CurrentEncyclopedia => UIParent.NotebookModel.NotebookResearch.GetEntry(currentCategory).Encyclopedia;
+    public ResearchEncyclopedia CurrentEncyclopedia => UIParent.Notebook.Research.GetEntry(currentCategory).Encyclopedia;
     public ResearchEncyclopediaArticle CurrentArticle => CurrentEncyclopedia.GetArticle(currentArticleID);
 
     public ResearchEncyclopediaArticleID CurrentArticleID
@@ -41,6 +41,9 @@ public class ResearchEncyclopediaUI : NotebookUIChild
     [SerializeField]
     [Tooltip("Input field used to display the encyclopedia article")]
     private ResearchEncyclopediaArticleInputField articleBody;
+    [SerializeField]
+    [Tooltip("Script that is targetted by the bookmarking system")]
+    private BookmarkTarget bookmarkTarget;
 
     // Maps the research category to the index of the article previously selected
     private Dictionary<ResearchCategory, int> previousSelected = new Dictionary<ResearchCategory, int>();
@@ -49,9 +52,9 @@ public class ResearchEncyclopediaUI : NotebookUIChild
     // Current research article selected
     private ResearchEncyclopediaArticleID currentArticleID;
 
-    protected override void Awake()
+    public override void Setup()
     {
-        base.Awake();
+        base.Setup();
 
         // Add listener for change of dropdown value
         // (is "on value changed" invoked at the start?)
@@ -65,6 +68,9 @@ public class ResearchEncyclopediaUI : NotebookUIChild
 
         // Add listener for changes in the research category selected
         categoryPicker.OnResearchCategoryChanged.AddListener(OnResearchCategoryChanged);
+
+        // Setup the bookmark target to get/set the article id
+        bookmarkTarget.Setup(() => CurrentArticleID, x => CurrentArticleID = (ResearchEncyclopediaArticleID)x);
     }
 
     private void OnResearchCategoryChanged(ResearchCategory category)
@@ -118,12 +124,12 @@ public class ResearchEncyclopediaUI : NotebookUIChild
     {
         string label = id.Title;
         // Only include the author if it has an author
-        if (id.Author != "") label += " by " + id.Author;
+        if (id.Author != "") label += "\n" + id.Author;
         return label;
     }
     public static ResearchEncyclopediaArticleID DropdownLabelToArticleID(string label)
     {
-        string[] titleAndAuthor = Regex.Split(label, " by ");
+        string[] titleAndAuthor = Regex.Split(label, "\n");
 
         // If there are two items in the split string, use them both
         if(titleAndAuthor.Length > 1)

@@ -9,7 +9,7 @@ public class ResearchEncyclopediaArticle
     // Public accessors of private data
     public ResearchEncyclopediaArticleID ID => id;
     public string Text => trueText;
-    public Sprite Image => image;
+    public Sprite[] Sprites => sprites;
     public List<ResearchEncyclopediaArticleHighlight> Highlights => highlights;
 
     // Private editor data
@@ -22,7 +22,7 @@ public class ResearchEncyclopediaArticle
     private string text;
     [SerializeField]
     [Tooltip("Image that can display in the article")]
-    private Sprite image;
+    private Sprite[] sprites;
 
     [Tooltip("List of all the highlights made in this article")]
     private List<ResearchEncyclopediaArticleHighlight> highlights = new List<ResearchEncyclopediaArticleHighlight>();
@@ -33,53 +33,52 @@ public class ResearchEncyclopediaArticle
 
     public void Setup()
     {
-        // Clear all highlights and reset the true text to the written text
-        // NOTE: this "highlights.Clear()" will have to change later when the user has saved data
-        highlights.Clear();
-        trueText = text;
-
-        // IMPORTANT: I don't think we can keep doing this. If the player wants to remove an initial highlight, this will just put the highlight back in
-
-        // Set start and end indices
-        int start = -1;
-        // Previous brace found
-        char prevBrace = ' ';
-
-        for(int i = 0; i < trueText.Length; i++)
+        if(highlights.Count <= 0)
         {
-            if(trueText[i] == '{')
+            // Clear all highlights and reset the true text to the written text
+            trueText = text;
+
+            // Set start and end indices
+            int start = -1;
+            // Previous brace found
+            char prevBrace = ' ';
+
+            for (int i = 0; i < trueText.Length; i++)
             {
-                // If previous brace also opened, then we have invalid syntax
-                if(prevBrace == '{')
+                if (trueText[i] == '{')
                 {
-                    ReportInitialHighlightError(i, "an opening curly brace", "a closing curly brace");
-                    return;
+                    // If previous brace also opened, then we have invalid syntax
+                    if (prevBrace == '{')
+                    {
+                        ReportInitialHighlightError(i, "an opening curly brace", "a closing curly brace");
+                        return;
+                    }
+
+                    // Set start index and previous brace found
+                    start = i;
+                    prevBrace = '{';
+
+                    // Remove the curly brace
+                    trueText = trueText.Remove(i, 1);
+                    i--;
                 }
-
-                // Set start index and previous brace found
-                start = i;
-                prevBrace = '{';
-
-                // Remove the curly brace
-                trueText = trueText.Remove(i, 1);
-                i--;
-            }
-            else if(trueText[i] == '}')
-            {
-                // If previous brace also closed, we have invalid syntax
-                if(prevBrace == '}' || prevBrace == ' ')
+                else if (trueText[i] == '}')
                 {
-                    ReportInitialHighlightError(i, "a closing curly brace", "an opening curly brace");
-                    return;
+                    // If previous brace also closed, we have invalid syntax
+                    if (prevBrace == '}' || prevBrace == ' ')
+                    {
+                        ReportInitialHighlightError(i, "a closing curly brace", "an opening curly brace");
+                        return;
+                    }
+
+                    // Remove the curly brace
+                    trueText = trueText.Remove(i, 1);
+                    i--;
+
+                    // Add the highlight now that we found the closing brace
+                    highlights.Add(new ResearchEncyclopediaArticleHighlight(start, i));
+                    prevBrace = '}';
                 }
-
-                // Remove the curly brace
-                trueText = trueText.Remove(i, 1);
-                i--;
-
-                // Add the highlight now that we found the closing brace
-                highlights.Add(new ResearchEncyclopediaArticleHighlight(start, i));
-                prevBrace = '}';
             }
         }
     }

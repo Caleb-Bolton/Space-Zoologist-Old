@@ -13,4 +13,70 @@ MonoBehaviour:
   m_Name: Notebook
   m_EditorClassIdentifier: 
   acronym: ROCTM
-  notebookResearch: {fileID: 11400000, guid: c5f58637365d268459e99748ffe0a624, type: 2}
+  research: {fileID: 11400000, guid: c5f58637365d268459e99748ffe0a624, type: 2}
+  observations:
+    enclosureScaffold: {fileID: 11400000, guid: 4288bb66b31c80a4993552b1c8d9a539,
+      type: 2}
+    initialEntries:
+    - entries:
+      - title: Food
+        text: 'Current situation:
+
+
+          Good for which species?:
+
+
+          What
+          more does each species still need to meet target specifications?:
+
+'
+      - title: Water
+        text: 'Current situation:
+
+
+          Good for which species?:
+
+
+          What
+          more does each species still need to meet target specifications?:
+
+'
+      - title: Terrain
+        text: 'Current situation:
+
+
+          Good for which species?:
+
+
+          What
+          more does each species still need to meet target specifications?:
+
+'
+      - title: Other
+        text: 'What can each species access?:
+
+
+          What are available resources?:
+
+'
+    - entries:
+      - title: Food
+        text: 
+      - title: Water
+        text: 
+      - title: Terrain
+        text: 
+      - title: Other
+        text: 
+  testAndMetrics:
+    enclosureScaffold: {fileID: 11400000, guid: 4288bb66b31c80a4993552b1c8d9a539,
+      type: 2}
+    initialTexts:
+    - 'when:
+
+
+      Does this meet target specifications?:
+
+
+      Related notes:'
+    - 'when:'

@@ -21,14 +21,8 @@ public class ResearchEncyclopediaArticleInputField : NotebookUIChild, IEndDragHa
     [Tooltip("Text field used to display the encyclopedia article")]
     private TMP_InputField textField;
     [SerializeField]
-    [Tooltip("Layout group used to layout the article text and image")]
-    private LayoutGroup articleLayout;
-    [SerializeField]
-    [Tooltip("Image component used to render the image for the encyclopedia article")]
-    private Image image;
-    [SerializeField]
-    [Tooltip("Empty sprite to display if the article doesn't have one for us")]
-    private Sprite noneSprite;
+    [Tooltip("Parent of the image objects for this article")]
+    private RectTransform imageParent;
     [SerializeField]
     [Tooltip("Toggle used to determine if highlights are being added or removed")]
     private Toggle highlightToggle;
@@ -103,16 +97,13 @@ public class ResearchEncyclopediaArticleInputField : NotebookUIChild, IEndDragHa
         { 
             textField.text = RichEncyclopediaArticleText(currentArticle, highlightTags);
 
-            // Set the correct sprite
-            if (currentArticle.Image) image.sprite = currentArticle.Image;
-            else image.sprite = noneSprite;
+            // Destroy all images
+            foreach (Transform child in imageParent) Destroy(child.gameObject);
+            // Create an image object for each sprite
+            foreach (Sprite sprite in currentArticle.Sprites) CreateImage(sprite);
         }
         // No article given implies this encyclopedia has no entries
         else textField.text = "<color=#aaa>This encyclopedia has no entries</color>";
-
-        // Update the layout component since the text amount just changed
-        articleLayout.SetLayoutHorizontal();
-        articleLayout.SetLayoutVertical();
     }
 
     public static string RichEncyclopediaArticleText(ResearchEncyclopediaArticle article, List<RichTextTag> tags)
@@ -135,5 +126,23 @@ public class ResearchEncyclopediaArticleInputField : NotebookUIChild, IEndDragHa
         }
 
         return richText;
+    }
+
+    private void CreateImage(Sprite sprite)
+    {
+        GameObject imageObject = new GameObject(sprite.name);
+
+        // Add a rect transform and parent it under the desired parent
+        RectTransform imageTransform = imageObject.AddComponent<RectTransform>();
+        imageTransform.SetParent(imageParent);
+        imageTransform.localScale = Vector3.one;
+
+        // Add the image component that renders the sprite
+        imageObject.AddComponent<CanvasRenderer>();
+        Image image = imageObject.AddComponent<Image>();
+        image.sprite = sprite;
+        image.maskable = true;
+        image.type = Image.Type.Simple;
+        image.preserveAspect = true;
     }
 }

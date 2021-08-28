@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52e53c4d2142814a94f3088eec699e5, type: 3}
+  m_Name: SpiderEncyclopedia
+  m_EditorClassIdentifier: 
+  articlesList:
+  - id:
+      title: Ecological Summary - Thalassius Succo
+      author: 
+    text: Thalassius Succo range from 0.02 to 3.5 inches in length, featuring two
+      main body parts, four legs, two non-venomous, pincer-like appendages, and six
+      pairs of spinnerets. Thalassius Succo were observed to scale rocky mountain
+      terrain using intricate webs. The animal and its extruded silk vary between
+      blues and greens. Thalassius Succo was observed to survive in three different
+      terrain types, despite an increase of predators in grasslands.
+    image: {fileID: 0}
+  - id:
+      title: Transport Log
+      author: Barry Wachmann
+    text: "Dr. Star instructed me to test out Thalassius Succo\u2019s food preferences.
+      I started with what seems to be the most common food accepted by Planet X animals--berries.
+      The Succo suckers just rolled the berries around for fun instead of eating
+      them, though. They seemed to like eating insects and various types of mushrooms.
+      They\u2019re pretty small, so they didn\u2019t consume much of my stock, maybe
+      3-5 bits of food per animal."
+    image: {fileID: 0}
+  - id:
+      title: Observation Log
+      author: Juno Fornax
+    text: "March 29, 3020, 9:00 am\r\nThalassius Succo appears to be spending equal
+      time in Carigoln Lake proper and its surrounding terrain. As a freshwater lake,
+      this species\u2019 survivability most likely decreases in salt water\u2026
+      \r\n\r\nMarch 29, 3020, 12:00 pm\r\nIncoming report of Thalassius Succo sighted
+      in the Atacail Desert. Odd. Given the species\u2019 previous adherence to rock
+      and grass-based terrain, this is highly unusual. Repositioning now."
+    image: {fileID: 0}
+  - id:
+      title: Research Abstract
+      author: Juno Fornax
+    text: "Predator-Prey Interactions: Thalassius Succo vs. Terran Terrestrial Insects\r\n\nTerran
+      spiders are well known for their predator-prey relationships, particularly
+      their tendency to only eat living organisms. Rare species prey upon veretebrates
+      such as frogs, lizards, and bats, while most terran spiders consume insects
+      and other spiders. Planet X\u2019s Thalassius Succo, the predominant spider-like
+      species, has not been observed as a predator to any other species, or its fellows.
+      Due to its natural proximity to water, however, Thalassius Succo appears to
+      be prey to Humidum Limax. Further predator-prey relationships necessitate further
+      study and experimentation with differing species."
+    image: {fileID: 0}

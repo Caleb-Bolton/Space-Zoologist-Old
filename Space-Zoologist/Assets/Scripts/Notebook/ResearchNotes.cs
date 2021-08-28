@@ -8,7 +8,7 @@ public class ResearchNotes
     // Public accessors
 
     public ResearchNoteLabels Labels => labels;
-    public string Notes { get; set; }
+    public string Notes { get; set; } = string.Empty;
 
     // Private editor data
 
@@ -19,20 +19,23 @@ public class ResearchNotes
 
     public void Setup()
     {
-        // Tags used to decorate the labels in the notes
-        List<RichTextTag> labelTags = new List<RichTextTag>()
-        {
-            new RichTextTag("color", "white"),
-            new RichTextTag("b")
-        };
+        // Later, we need to load the existing data
+        Notes = string.Empty;
 
-        // Instead, we will have to load the player's data
-        Notes = "";
-        
-        foreach(string label in labels.Labels)
+        if(Notes == string.Empty)
         {
-            string richLabel = RichTextTag.ApplyMultiple(labelTags, label + ":");
-            Notes += richLabel + " \n\n";
+            // Tags used to decorate the labels in the notes
+            List<RichTextTag> labelTags = new List<RichTextTag>()
+            {
+                new RichTextTag("color", "white"),
+                new RichTextTag("font", "\"times new roman SDF\"")
+            };
+            // Add the labels to the notes if they are not empty
+            foreach (string label in labels.Labels)
+            {
+                string richLabel = RichTextTag.ApplyMultiple(labelTags, label + ":");
+                Notes += richLabel + " \n\n";
+            }
         }
     }
 }

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52e53c4d2142814a94f3088eec699e5, type: 3}
+  m_Name: MushroomEncyclopedia
+  m_EditorClassIdentifier: 
+  articlesList:
+  - id:
+      title: Ecological Summary - Boletus Anceps
+      author: 
+    text: Boletus Anceps is a spore-bearing fruiting body of a fungus. The most common
+      variant of Boletus Anceps is a gilled fungi with stems. Observed to be a rapidly
+      growing species, the developing primordium from which Boletus Anceps develops
+      is unusually large, at around 4 millimeters in diameter. Similarly, production
+      rates for nearby predators appear to be 5-8 edible caps and extensions.
+    image: {fileID: 0}
+  - id:
+      title: Transport Log
+      author: Barry Wachmann
+    text: "Soft and squishy like a fishy! Boletus Anceps appears to absorb water
+      very well, particularly allowing for more salt and bacteria than other flora
+      I\u2019ve transported. Bacteria is usually akin to poison for most flora and
+      fauna from Planet X, but this species seems comfortable with a diverse composition."
+    image: {fileID: 0}
+  - id:
+      title: Observation Log
+      author: Barry Wachmann
+    text: "April 2, 3020, 4:00 pm\r\nThe transplantation of Boletus Anceps from the
+      Pastillion Mountain Range into other notable biomes is complete. I hope they
+      grow!\r\n\r\nApril 9, 3020, 4:00 pm\r\nA week later, the hyphae networks, or
+      mycelium, have rapidly grown in swamp, dirt, and grass biomes. They must have
+      a preference for terrain with soil and relative ease of access to water. No
+      indication of hyphae strands are present in deserts thus far.\r"
+    image: {fileID: 0}
+  - id:
+      title: Research Abstract
+      author: Dr. Aurora Star
+    text: "Liquid Composition Needs in Planet X\u2019s Popular Flora\r\n\r\nBoletus
+      Anceps was observed to require a minimum of 94% pure water and 2% bacteria,
+      with an unusually large root radius of 6 by interning researcher Barry Wachmann
+      at Natura Serva 22. The most similar popular flora, Coruscent Laminar, has
+      a similar bacteria need; however, its root radius and pure water needs are
+      almost opposite, sitting at around 1 and 97% respectively. While both species
+      rely on water for survival, Boletus Anceps only finding thriving terrain in
+      swamps and Coruscent Laminar only present in water pools, the degree of variance
+      requires further investigation. \r"
+    image: {fileID: 0}

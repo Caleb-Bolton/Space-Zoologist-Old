@@ -13,7 +13,7 @@ public struct RichTextTag
         get
         {
             string tag = "<" + name;
-            if (value != null) tag += "=" + value;
+            if (!string.IsNullOrEmpty(value)) tag += "=" + value;
             return tag + ">";
         }
     }

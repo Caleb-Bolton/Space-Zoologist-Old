@@ -5,122 +5,122 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+using DG.Tweening;
+
 public class ResearchCategoryPicker : NotebookUIChild
 {
     // So that the event appears in the editor
     [System.Serializable] public class ResearchCategoryEvent : UnityEvent<ResearchCategory> { }
 
     // Public accessors
-
+    #region Public Properties
     public ResearchCategory SelectedCategory
     {
         get => selectedCategory;
         set
         {
-            // Activate the type button with this type (this invokes OnResearchCategoryTypeChanged)
-            typeButtons[(int)value.Type].MyToggle.isOn = true;
-            // Activate the name button with this name (this invokes OnResearchCategoryNameChanged)
-            nameButtonGroups[(int)value.Type].SelectButton(value.Name);
+            // Set the research category on each dropdown (those that can't select this category ignore it)
+            foreach(ResearchCategoryDropdown dropdown in dropdowns)
+            {
+                dropdown.SetResearchCategory(value);
+            }
         }
     }
     public ResearchCategoryEvent OnResearchCategoryChanged => onResearchCategoryChanged;
-    public bool HasBeenInitialized => SelectedCategory.Name != null && SelectedCategory.Name != "";
+    public bool HasBeenInitialized => !string.IsNullOrEmpty(selectedCategory.Name);
+    #endregion
 
-    // Private editor fields
-
-    [Header("Research Category Type Selection")]
-
+    #region Private Editor Fields
     [SerializeField]
-    [Tooltip("This toggle group will be the parent of all toggles used to select the research category's type")]
-    private ToggleGroup typeGroup;
+    [Tooltip("Reference to the prefab used to select a research category")]
+    private TypeFilteredResearchCategoryDropdown dropdown;
     [SerializeField]
-    [Tooltip("Prefab of the button used to select the research category type")]
-    private ResearchCategoryTypeButton typeButton;
-
-    [Header("Research Category Name Selection")]
-
+    [Tooltip("Parent transform that the dropdowns are instantiated into")]
+    private Transform dropdownParent;
     [SerializeField]
-    [Tooltip("This toggle group will be the parent of all toggles used to select the research category's name")]
-    private ToggleGroup nameGroup;
+    [Tooltip("Sprite of the dropdown when it is selected")]
+    private Sprite selectedSprite;
     [SerializeField]
-    [Tooltip("Prefab of the button used to select the research name")]
-    private ResearchCategoryNameButton nameButton;
-
-    [Header("Events")]
-
+    [Tooltip("Sprite of the dropdown when it is not selected")]
+    private Sprite notSelectedSprite;
+    [SerializeField]
+    [Tooltip("Scale of the button when it is selected")]
+    private float selectedScale = 0.2f;
+    [SerializeField]
+    [Tooltip("Time it takes for the button to grow/shrink when selected/deselected")]
+    private float sizeChangeTime = 0.5f;
+    [SerializeField]
+    [Tooltip("Reference to the script targetted by the bookmarking system")]
+    private BookmarkTarget bookmarkTarget;
     [SerializeField]
     [Tooltip("Event invoked when the research category picker changes category picked")]
     private ResearchCategoryEvent onResearchCategoryChanged;
+    #endregion
 
+    #region Private Fields
+    // List of the dropdowns used by the category picker
+    private List<ResearchCategoryDropdown> dropdowns = new List<ResearchCategoryDropdown>();
     // The category currently selected
     private ResearchCategory selectedCategory;
-    // List of name button groups
-    // NOTE: access the buttons for category type using nameButtonGroups[(int)ResearchCategoryType]
-    private List<ResearchCategoryNameButtonGroup> nameButtonGroups = new List<ResearchCategoryNameButtonGroup>();
-    // List of buttons used to select the type
-    // NOTE: access the buttons by type using typeButtons[(int)ResearchCategoryType]
-    private List<ResearchCategoryTypeButton> typeButtons = new List<ResearchCategoryTypeButton>();
+    #endregion
 
-    protected override void Awake()
+    #region Public Methods
+    public override void Setup()
     {
-        base.Awake();
+        base.Setup();
 
-        // Go through all research categories in the research model, adding buttons to each group in the list
-        foreach (KeyValuePair<ResearchCategory, ResearchEntry> entry in UIParent.NotebookModel.NotebookResearch.ResearchDictionary)
-        {
-            // Add groups until the count exceeds the current index we need to insert into
-            while(nameButtonGroups.Count <= (int)entry.Key.Type)
-            {
-                nameButtonGroups.Add(new ResearchCategoryNameButtonGroup());
-            }            
+        // Setup the bookmark target
+        bookmarkTarget.Setup(() => SelectedCategory, c => SelectedCategory = (ResearchCategory)c);
 
-            // Create a clone and set it up
-            ResearchCategoryNameButton clone = Instantiate(nameButton, nameGroup.transform);
-            clone.Setup(nameGroup, entry.Key.Name, entry.Key.Image, OnResearchCategoryNameChanged);
-            // Add it to the current category name button group
-            nameButtonGroups[(int)entry.Key.Type].AddButton(clone);
-        }
-
-        // Disable all button groups initially
-        foreach (ResearchCategoryNameButtonGroup group in nameButtonGroups)
-        {
-            group.SetActive(false);
-        }
-
-        // Get all research category types
         ResearchCategoryType[] types = (ResearchCategoryType[])System.Enum.GetValues(typeof(ResearchCategoryType));
-        // Loop through all types.  Instantiate a button for each type
-        for (int i = 0; i < types.Length; i++)
-        {
-            ResearchCategoryTypeButton clone = Instantiate(typeButton, typeGroup.transform);
-            // Setup clone. The first one is selected.
-            // NOTE: this invokes OnResearchCategoryTypeChanged immediately
-            clone.Setup(typeGroup, types[i], OnResearchCategoryTypeChanged, i == 0);
-            typeButtons.Add(clone);
-        }
-    }
 
-    private void OnResearchCategoryTypeChanged(ResearchCategoryType type)
-    {
-        // If a previous category has been selected, then disable it
-        if(selectedCategory.Name != null)
+        // Instantiate a dropdown for each type and set it up
+        foreach(ResearchCategoryType type in types)
         {
-            nameButtonGroups[(int)selectedCategory.Type].SetActive(false);   
+            TypeFilteredResearchCategoryDropdown clone = Instantiate(dropdown, dropdownParent);
+            // Setup the clone's type and add a listener for the category change
+            clone.Setup(type);
+            clone.OnResearchCategorySelected.AddListener(ResearchCategoryChanged);
+            // Add to the list of our dropdowns
+            dropdowns.Add(clone);
         }
 
-        // Create the currently selected category
-        selectedCategory = new ResearchCategory(type, "", null);
-
-        // Enable the new name button group
-        // NOTE: this invokes OnResearchCategoryNameChanged immediately
-        nameButtonGroups[(int)type].SetActive(true);
+        // Set the first value of the first dropdown
+        // NOTE: this should invoke ResearchCategoryChanged immediately
+        dropdowns[0].SetDropdownValue(0);
     }
+    #endregion
 
-    private void OnResearchCategoryNameChanged(string name, Sprite image)
+    #region Private Methods
+    private void ResearchCategoryChanged(ResearchCategory category)
     {
-        selectedCategory = new ResearchCategory(selectedCategory.Type, name, image);
+        selectedCategory = category;
 
-        // Invoke the event
-        onResearchCategoryChanged.Invoke(selectedCategory);
+        // Set the sprites of the backgrounds of the dropdown images
+        foreach(TypeFilteredResearchCategoryDropdown dropdown in dropdowns)
+        {
+            // Get this dropdown rect transform. Make sure it finishes any scale animations
+            RectTransform dropdownRect = dropdown.GetComponent<RectTransform>();
+            //dropdownRect.DOComplete(true);
+
+            if (dropdown.TypeFilter[0] == category.Type)
+            {
+                // Make this dropdown a little bigger
+                dropdownRect.DOScale(1f + selectedScale, sizeChangeTime);
+                // Set the correct sprite
+                dropdown.Dropdown.image.sprite = selectedSprite;
+            }
+            else
+            {
+                // Make this dropdown the default size
+                dropdownRect.DOScale(1f, sizeChangeTime);
+                // Set the correct sprite
+                dropdown.Dropdown.image.sprite = notSelectedSprite;
+            }
+        }
+
+        onResearchCategoryChanged.Invoke(category);
+        UIParent.OnContentChanged.Invoke();
     }
+    #endregion
 }
