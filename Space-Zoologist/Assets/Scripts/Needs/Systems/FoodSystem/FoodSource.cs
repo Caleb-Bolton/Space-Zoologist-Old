@@ -14,7 +14,7 @@ public class FoodSource : MonoBehaviour, Life
     public float FoodOutput => CalculateOutput();
     public Vector2 Position { get; private set; } = Vector2.zero;
     public bool terrainNeedMet = false;
-    public bool liquidNeedMet = false;
+    public bool waterNeedMet = false;
 
     public float TerrainRating => terrainRating;
     public float WaterRating => waterRating;
@@ -70,7 +70,7 @@ public class FoodSource : MonoBehaviour, Life
         this.GetComponent<SpriteRenderer>().sprite = species.FoodSourceItem.Icon;
         this.InitializeNeedValues();
         this.gridSystem = gridSystem;
-        this.accessibleTerrian = this.gridSystem.CountOfTilesInRange(Vector3Int.FloorToInt(this.Position), this.Species.RootRadius);
+        this.accessibleTerrian = this.gridSystem.CountOfTilesInRange(Vector3Int.FloorToInt(this.Position), this.Species.Size);
     }
 
     private void InitializeNeedValues()
@@ -80,63 +80,123 @@ public class FoodSource : MonoBehaviour, Life
 
     private float CalculateOutput()
     {
-        terrainNeedMet = false;
-        liquidNeedMet = false;
-        
-        float numPreferredTiles = 0f;
-        float survivableTiles = 0f;
-        float totalNeededTiles = 0f;
-        foreach (KeyValuePair<string, Need> needValuePair in this.needs)
+        CalculateTerrainNeed();
+        CalculateWaterNeed();
+
+        float output;
+
+        if(waterNeedMet && terrainNeedMet)
         {
-            string needType = needValuePair.Key;
-            Need needValue = needValuePair.Value;
-     
-            if (needType.Equals("Water") && needValue.NeedType.Equals(NeedType.Liquid))
-            {
-                if (needIsSatisified(needType, needValue.NeedValue))
-                {
-                    waterRating = 1 + (needValue.NeedValue - needValue.GetMaxThreshold());
-                    liquidNeedMet = true;
-                }
-            }
-            if (needValue.NeedType.Equals(NeedType.Terrain))
-            {
-                totalNeededTiles = needValue.GetMaxThreshold();
-                if (needValue.IsPreferred)
-                {
-                    numPreferredTiles = needValue.NeedValue;
-                }
-                else
-                {
-                    survivableTiles = needValue.NeedValue;
-                }
-            }
-        }
-        //Debug.Log(gameObject.name + " surv tiles: " + survivableTiles + " pref tiles: " + numPreferredTiles);
-        if (survivableTiles + numPreferredTiles >= totalNeededTiles)
-        {
-            terrainRating = species.BaseOutput + numPreferredTiles;
-            terrainNeedMet = true;
+            output = species.BaseOutput * (1 + (waterRating + terrainRating)/2);
         }
         else
         {
-            terrainRating = species.BaseOutput - (totalNeededTiles - survivableTiles - numPreferredTiles);
-            if (terrainRating < 0) terrainRating = 0;
+            output = species.BaseOutput * (1 + Mathf.Min(waterRating, 0)) * (1 + Mathf.Min(terrainRating, 0));
         }
-        //Debug.Log(gameObject.name + " waterRating: " + waterRating + " terrainRating: " + terrainRating);
-        float output = waterRating + terrainRating;
+
         return output;
     }
 
-    private bool needIsSatisified(string needType, float needValue)
+    public void CalculateTerrainNeed()
     {
-        NeedCondition condition = this.needs[needType].GetCondition(needValue);
-        // A need is not satisfied
-        if (condition != NeedCondition.Good)
+        float totalNeededTiles = Mathf.Pow(species.Size, 2);
+        float availablePreferredTiles = 0f;
+        float availableSurvivableTiles = 0f;
+        float totalTilesAvailable = 0f;
+
+        foreach (KeyValuePair<string, Need> need in this.needs)
         {
-            return false;
+            if (need.Value.NeedType.Equals(NeedType.Terrain))
+            {
+                if (need.Value.IsPreferred)
+                {
+                    availablePreferredTiles += need.Value.NeedValue;
+                }
+                else
+                {
+                    availableSurvivableTiles += need.Value.NeedValue;
+                }
+            }
         }
-        return true;
+
+        totalTilesAvailable = availablePreferredTiles + availableSurvivableTiles;
+        if (totalTilesAvailable >= totalNeededTiles)
+        {
+            terrainNeedMet = true;
+            terrainRating = availablePreferredTiles / totalNeededTiles;
+        }
+        else
+        {
+            terrainNeedMet = false;
+            terrainRating = (totalTilesAvailable - totalNeededTiles) / totalNeededTiles;
+        }
+
+        //Debug.Log(gameObject.name + " terrain Rating: " + terrainRating + ", preferred tiles: " + availablePreferredTiles + ", survivable tiles: " + availableSurvivableTiles);
+    }
+
+    public void CalculateWaterNeed()
+    {
+        if(!needs.ContainsKey("LiquidTiles"))
+        {
+            waterRating = 0;
+            return;
+        }
+
+        LiquidNeed tileNeed = (LiquidNeed)needs["LiquidTiles"];
+
+        LiquidNeed waterNeed = null;
+        if(needs.ContainsKey("Water"))
+            waterNeed = (LiquidNeed)needs["Water"];
+
+        LiquidNeed saltNeed = null;
+        if(needs.ContainsKey("Salt"))
+            saltNeed = (LiquidNeed)needs["Salt"];
+
+        LiquidNeed bacteriaNeed = null;
+        if(needs.ContainsKey("Bacteria"))
+            bacteriaNeed = (LiquidNeed)needs["Bacteria"];
+
+        float waterSourceSize = tileNeed.NeedValue;
+        float totalNeedWaterTiles = tileNeed.GetThreshold();
+        float waterTilesUsed = Mathf.Min(waterSourceSize, totalNeedWaterTiles);
+
+        if (waterTilesUsed >= totalNeedWaterTiles)
+        {
+            Debug.Log("Water need met");
+            waterNeedMet = true;
+            waterRating = 0;
+
+            if(waterNeed != null)
+            {
+                float percentPureWater = waterNeed.NeedValue;
+                float neededPureWaterThreshold = waterNeed.GetThreshold();
+                waterRating += (percentPureWater - neededPureWaterThreshold) / (GrowthCalculator.maxFreshWaterTilePercent - neededPureWaterThreshold);
+                Debug.Log("Pure water received: " + percentPureWater + " out of " + neededPureWaterThreshold);
+            }
+
+            if(saltNeed != null)
+            {
+                float percentSalt = saltNeed.NeedValue;
+                float neededSaltThreshold = saltNeed.GetThreshold();
+                waterRating += (percentSalt - neededSaltThreshold) / (GrowthCalculator.maxSaltTilePercent - neededSaltThreshold);
+                Debug.Log("Salt received: " + percentSalt + " out of " + neededSaltThreshold);
+            }
+
+            if(bacteriaNeed != null)
+            {
+                float percentBacteria = bacteriaNeed.NeedValue;
+                float neededBacteriaThreshold = bacteriaNeed.GetThreshold();
+                waterRating += (percentBacteria - neededBacteriaThreshold) / (GrowthCalculator.maxBacteriaTilePercent - neededBacteriaThreshold);
+                Debug.Log("Bacteria received: " + percentBacteria + " out of " + neededBacteriaThreshold);
+            }
+        }
+        else
+        {
+            waterNeedMet = false;
+            waterRating = (waterTilesUsed - totalNeedWaterTiles) / totalNeedWaterTiles;
+        }
+
+        Debug.Log(gameObject.name + " water Rating: " + waterRating + ", water source size: " + waterTilesUsed);
     }
 
     /// <summary>
@@ -184,7 +244,7 @@ public class FoodSource : MonoBehaviour, Life
         }
 
         var preTerrain = this.accessibleTerrian;
-        var curTerrain = this.gridSystem.CountOfTilesInRange(Vector3Int.FloorToInt(this.Position), this.Species.RootRadius);
+        var curTerrain = this.gridSystem.CountOfTilesInRange(Vector3Int.FloorToInt(this.Position), this.Species.Size);
 
         // Accessible terrain had changed
         this.hasAccessibilityChecked = true;
@@ -203,7 +263,7 @@ public class FoodSource : MonoBehaviour, Life
     {
         if (this.hasAccessibilityChanged)
         {
-            this.accessibleTerrian = this.gridSystem.CountOfTilesInRange(Vector3Int.FloorToInt(this.Position), this.Species.RootRadius);
+            this.accessibleTerrian = this.gridSystem.CountOfTilesInRange(Vector3Int.FloorToInt(this.Position), this.Species.Size);
         }
 
         // Reset flags

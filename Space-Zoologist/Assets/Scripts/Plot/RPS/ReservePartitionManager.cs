@@ -38,8 +38,11 @@ public class ReservePartitionManager : MonoBehaviour
 
     public Dictionary<Population, int[]> TypesOfTerrain;
 
-    public Dictionary<Population, List<float[]>> PopulationAccessibleLiquid => this.PopulationAccessibleLiquid;
-    private Dictionary<Population, List<float[]>> populationAccessibleLiquid;
+    public Dictionary<Population, List<float[]>> PopulationAccessibleLiquidCompositions => this.populationAccessibleLiquidCompositions;
+    private Dictionary<Population, List<float[]>> populationAccessibleLiquidCompositions;
+
+    public Dictionary<Population, List<Vector3Int>> PopulationAccessibleLiquidLocations => this.populationAccessibleLiquidLocations;
+    private Dictionary<Population, List<Vector3Int>> populationAccessibleLiquidLocations;
 
     public GameTile Liquid;
     [SerializeField] private GridSystem gridSystem = default;
@@ -62,7 +65,8 @@ public class ReservePartitionManager : MonoBehaviour
         AccessibleArea = new Dictionary<Population, List<Vector3Int>>();
         SharedSpaces = new Dictionary<int, long[]>();
         TypesOfTerrain = new Dictionary<Population, int[]>();
-        populationAccessibleLiquid = new Dictionary<Population, List<float[]>>();
+        populationAccessibleLiquidCompositions = new Dictionary<Population, List<float[]>>();
+        populationAccessibleLiquidLocations = new Dictionary<Population, List<Vector3Int>>();
     }
 
     private void Start()
@@ -151,6 +155,7 @@ public class ReservePartitionManager : MonoBehaviour
         HashSet<Vector3Int> unaccessible = new HashSet<Vector3Int>();
         Vector3Int cur;
         List<Vector3Int> newAccessibleLocations = new List<Vector3Int>();
+        List<Vector3Int> newLiquidLocations = new List<Vector3Int>();
         List<float[]> newLiquidCompositions = new List<float[]>();
 
         if (!this.AccessibleArea.ContainsKey(population))
@@ -193,12 +198,18 @@ public class ReservePartitionManager : MonoBehaviour
             {
                 float[] composition = gridSystem.GetTileContentsAt(cur, tile);
 
-                if (!this.populationAccessibleLiquid.ContainsKey(population))
+                if (!this.populationAccessibleLiquidCompositions.ContainsKey(population))
                 {
-                    this.populationAccessibleLiquid.Add(population, new List<float[]>());
+                    this.populationAccessibleLiquidCompositions.Add(population, new List<float[]>());
+                }
+
+                if (!this.populationAccessibleLiquidLocations.ContainsKey(population))
+                {
+                    this.populationAccessibleLiquidLocations.Add(population, new List<Vector3Int>());
                 }
 
                 newLiquidCompositions.Add(composition);
+                newLiquidLocations.Add(cur);
             }
 
             if (tile != null && population.Species.AccessibleTerrain.Contains(tile.type))
@@ -256,7 +267,8 @@ public class ReservePartitionManager : MonoBehaviour
         if(population.HasAccessibilityChanged)
         {
             this.AccessibleArea[population] = newAccessibleLocations;
-            this.populationAccessibleLiquid[population] = newLiquidCompositions;
+            this.populationAccessibleLiquidCompositions[population] = newLiquidCompositions;
+            this.populationAccessibleLiquidLocations[population] = newLiquidLocations;
         }
     }
 
@@ -457,11 +469,21 @@ public class ReservePartitionManager : MonoBehaviour
 
     public List<float[]> GetLiquidComposition(Population population)
     {
-        if (!this.populationAccessibleLiquid.ContainsKey(population))
+        if (!this.populationAccessibleLiquidCompositions.ContainsKey(population))
         {
             return null;
         }
 
-        return this.populationAccessibleLiquid[population];
+        return this.populationAccessibleLiquidCompositions[population];
+    }
+
+    public List<Vector3Int> GetLiquidLocations(Population population)
+    {
+        if (!this.populationAccessibleLiquidLocations.ContainsKey(population))
+        {
+            return null;
+        }
+
+        return this.populationAccessibleLiquidLocations[population];
     }
 }

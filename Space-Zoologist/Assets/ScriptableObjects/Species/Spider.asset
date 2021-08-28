@@ -15,118 +15,34 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 46af803652d4d4e38b84d177baba5f60, type: 2}
   speciesName: Thalassius Succo
   species: 3
-  foodDominance: 1
   terrainTilesRequired: 1
-  growthScaleFactor: 0.0625
-  growthRate: 2
-  decayRate: 2
-  range: 3
-  size: 0
-  accessibleTerrain: 020000000300000001000000
+  minFoodRequired: 3
+  maxFoodRequired: 5
+  growthRate: 1
+  decayRate: 1
+  moveCost: 0
+  size: 1
+  accessibleTerrain: 02000000030000000100000000000000
   icon: {fileID: -2984124832550384540, guid: 5015206299b8e40848efa2bad0e91dd4, type: 3}
-  needsList:
-  - needType: 3
-    needs:
-    - needName: Ants
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 3
-      - 5
-    - needName: Mushrooms
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 3
-      - 5
-  - needType: 0
-    needs:
-    - needName: Stone
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 1
-    - needName: Grass
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 1
-    - needName: Sand
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 1
-    - needName: Liquid
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 1
-  - needType: 4
-    needs:
-    - needName: Water
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.965
-  - needType: 8
-    needs:
-    - needName: Ligurio Vermis
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.965
-    - needName: Humidum Limax
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.965
+  terrainNeeds:
+  - needName: Stone
+    isPreferred: 1
+  - needName: Grass
+    isPreferred: 0
+  - needName: Sand
+    isPreferred: 0
+  foodNeeds:
+  - needName: Ants
+    isPreferred: 0
+  - needName: Mushroom
+    isPreferred: 1
+  liquidNeeds:
+  - needName: 
+    tileNeedThreshold: 1
+    freshWaterMinThreshold: 0.965
+    freshWaterMaxThreshold: 1
+    saltMinThreshold: 0.005
+    saltMaxThreshold: 0.015
+    bacteriaMinThreshold: 0
+    bacteriaMaxThreshold: 1
   representation: {fileID: 0}

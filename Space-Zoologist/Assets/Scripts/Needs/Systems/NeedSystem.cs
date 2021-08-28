@@ -15,7 +15,7 @@ abstract public class NeedSystem
 
     // Dirty flag is on to force intial update
     protected bool isDirty = true;
-    protected List<Life> Consumers = new List<Life>();
+    protected HashSet<Life> Consumers = new HashSet<Life>();
 
     public NeedSystem(NeedType needType)
     {

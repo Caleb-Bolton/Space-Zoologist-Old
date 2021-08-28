@@ -136,11 +136,11 @@ public class NPCDialogueGenerator : MonoBehaviour
         // Compute a list of good needs and bad needs
         foreach (Need need in population.Needs.Values)
         {
-            if (need.GetCondition(need.NeedValue) == NeedCondition.Good)
+            if (need.IsThresholdMet(need.NeedValue))
             {
                 goodNeeds.Add(need.NeedName);
             }
-            else if (need.GetCondition(need.NeedValue) == NeedCondition.Bad)
+            else
             {
                 badNeeds.Add(need.NeedName);
             }

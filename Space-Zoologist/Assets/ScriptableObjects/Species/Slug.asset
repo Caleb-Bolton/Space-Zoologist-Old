@@ -15,88 +15,34 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: afe80bc84a5bc22449b95bda8c01671b, type: 2}
   speciesName: Humidum Limax
   species: 4
-  foodDominance: 2
   terrainTilesRequired: 2
-  growthScaleFactor: 0.0625
+  minFoodRequired: 2
+  maxFoodRequired: 3
   growthRate: 2
   decayRate: 2
-  range: 3
-  size: 0
+  moveCost: 0
+  size: 1
   accessibleTerrain: 040000000600000000000000
   icon: {fileID: -2984124832550384540, guid: 5015206299b8e40848efa2bad0e91dd4, type: 3}
-  needsList:
-  - needType: 3
-    needs:
-    - needName: Kelp
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 2
-      - 3
-    - needName: Mushroom
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 2
-      - 3
-  - needType: 0
-    needs:
-    - needName: Liquid
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 2
-    - needName: Swamp
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 2
-  - needType: 4
-    needs:
-    - needName: Water
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.955
-  - needType: 8
-    needs:
-    - needName: Eligans Impar
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.955
+  terrainNeeds:
+  - needName: Liquid
+    isPreferred: 0
+  - needName: Swamp
+    isPreferred: 1
+  foodNeeds:
+  - needName: Kelp
+    isPreferred: 1
+  - needName: Mushroom
+    isPreferred: 0
+  liquidNeeds:
+  - needName: 
+    tileNeedThreshold: 1
+    freshWaterMinThreshold: 0.95
+    freshWaterMaxThreshold: 1
+    saltMinThreshold: 0
+    saltMaxThreshold: 0.015
+    bacteriaMinThreshold: 0
+    bacteriaMaxThreshold: 1
+  preyNeeds:
+  - needName: Thalassius Succo
   representation: {fileID: 0}

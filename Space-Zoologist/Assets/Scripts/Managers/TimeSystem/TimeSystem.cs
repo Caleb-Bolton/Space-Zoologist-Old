@@ -25,7 +25,7 @@ public class TimeSystem : MonoBehaviour
     {
         this.buildBufferManager.CountDown();
         this.PopulationManager.UpdateAccessibleLocations();
-        this.PopulationManager.UdateAllPopulationRegistration();
+        //this.PopulationManager.UdateAllPopulationRegistration(); This seems bad, causes populations to keep getting re-added to its relevant needs systems
         this.NeedSystemManager.UpdateAllSystems();
         for (int i=PopulationManager.Populations.Count - 1; i>= 0; i--)
         {

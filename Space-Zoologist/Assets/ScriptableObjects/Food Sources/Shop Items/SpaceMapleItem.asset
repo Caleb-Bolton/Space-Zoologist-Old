@@ -21,4 +21,4 @@ MonoBehaviour:
   audio:
   - {fileID: 8300000, guid: 666050dc180294bdda3d21f7c0d839de, type: 3}
   - {fileID: 8300000, guid: f0ce8a4bb30564d0f939c385aacb0bc3, type: 3}
-  BuildTime: 3
+  BuildTime: 2

@@ -84,8 +84,6 @@ public class FoodSourceNeedSystem : NeedSystem
         // 2. Iterate through populations based on most dominant
         foreach (Population population in new SortedSet<Population>(rpm.Populations, new DominanceComparer()))
         {
-            Debug.Log(population.gameObject.name);
-
             float preferredAmount = 0;
             float compatibleAmount = 0;
 
@@ -94,22 +92,21 @@ public class FoodSourceNeedSystem : NeedSystem
             {
                 foreach (KeyValuePair<string, Need> need in population.Needs)
                 {
-                    float maxThreshold = need.Value.GetMaxThreshold() * population.Count;
                     // 4. Calculate preferred and available food, skipping if need already met
-                    if (!need.Value.NeedType.Equals(NeedType.FoodSource) || preferredAmount == maxThreshold || compatibleAmount == maxThreshold || !foodSourceCalculators.ContainsKey(need.Key))
+                    if (!need.Value.NeedType.Equals(NeedType.FoodSource) || !foodSourceCalculators.ContainsKey(need.Key))
                     {
                         continue;
                     }
 
                     if (j == 0 && need.Value.IsPreferred)
                     {
-                        preferredAmount += foodSourceCalculators[need.Key].CalculateDistribution(population, maxThreshold);
+                        preferredAmount += foodSourceCalculators[need.Key].CalculateDistribution(population);
                         continue;
                     }
 
                     if (j == 1 && !need.Value.IsPreferred)
                     {
-                        compatibleAmount += foodSourceCalculators[need.Key].CalculateDistribution(population, maxThreshold);
+                        compatibleAmount += foodSourceCalculators[need.Key].CalculateDistribution(population);
                     }
                 }
             }

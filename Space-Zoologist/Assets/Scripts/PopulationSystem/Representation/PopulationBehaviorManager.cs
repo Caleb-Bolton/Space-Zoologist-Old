@@ -153,23 +153,7 @@ public class PopulationBehaviorManager : MonoBehaviour
     {
         foreach (KeyValuePair<string, Need> needs in _needs)
         {
-            foreach (NeedBehavior needBehavior in needs.Value.Behaviors)
-            {
-                if (needBehavior.Condition.Equals(NeedCondition.Bad))
-                {
-                    if (!this.ActiveBehaviors.ContainsKey(needs.Key))
-                    {
-                        if (needBehavior.Behavior != null)
-                        {
-                            this.ActiveBehaviors.Add(needs.Key, needBehavior.Behavior);
-                        }
-                        else
-                        {
-                            this.ActiveBehaviors.Add(needs.Key, null);
-                        }
-                    }
-                }
-            }
+            this.ActiveBehaviors.Add(needs.Key, null);
         }
     }
 }

@@ -16,43 +16,20 @@ MonoBehaviour:
   accessibleTerrain: 06000000
   speciesName: Kelp
   rootRadius: 1
-  rootArea: 0
-  baseOutput: 12
+  baseOutput: 3
   moveCost: 0
   sellBackPrice: 1
-  needsList:
-  - needType: 0
-    needs:
-    - needName: Liquid
-      severity: 1
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 1.5
-  - needType: 4
-    needs:
-    - needName: Water
-      severity: 1
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 0.969
-    - needName: Bacteria
-      severity: 1
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 0.019
+  terrainNeeds:
+  - needName: Liquid
+    isPreferred: 1
+  foodNeeds: []
+  liquidNeeds:
+  - needName: Water
+    tileNeedThreshold: 1
+    freshWaterMinThreshold: 0.97
+    freshWaterMaxThreshold: 1
+    saltMinThreshold: 0
+    saltMaxThreshold: 1
+    bacteriaMinThreshold: 0.02
+    bacteriaMaxThreshold: 1
   FoodSource: {fileID: 11400000, guid: 3792eb18c264b412cb677e4d563f2df8, type: 2}

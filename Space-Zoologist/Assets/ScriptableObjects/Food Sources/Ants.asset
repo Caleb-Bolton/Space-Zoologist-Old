@@ -13,56 +13,29 @@ MonoBehaviour:
   m_Name: Ants
   m_EditorClassIdentifier: 
   size: 1
-  accessibleTerrain: 00000000010000000300000002000000
+  accessibleTerrain: 0000000001000000020000000300000004000000
   speciesName: Ants
-  rootRadius: 1
-  rootArea: 2
-  baseOutput: 10
+  rootRadius: 5
+  baseOutput: 8
   moveCost: 5
   sellBackPrice: 2
-  needsList:
-  - needType: 0
-    needs:
-    - needName: Grass
-      severity: 1
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 1
-    - needName: Liquid
-      severity: 1
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 2
-  - needType: 4
-    needs:
-    - needName: Water
-      severity: 1
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 0.94
-    - needName: Bacteria
-      severity: 1
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 0}
-      - Condition: 2
-        Behavior: {fileID: 0}
-      thresholds:
-      - 0.02
+  terrainNeeds:
+  - needName: Grass
+    isPreferred: 0
+  - needName: Dirt
+    isPreferred: 0
+  - needName: Sand
+    isPreferred: 0
+  - needName: Stone
+    isPreferred: 1
+  foodNeeds: []
+  liquidNeeds:
+  - needName: Water
+    tileNeedThreshold: 2
+    freshWaterMinThreshold: 0.95
+    freshWaterMaxThreshold: 1
+    saltMinThreshold: 0
+    saltMaxThreshold: 1
+    bacteriaMinThreshold: 0
+    bacteriaMaxThreshold: 1
   FoodSource: {fileID: 11400000, guid: 9d1b9acb9c2f440bf87aa51faebebb92, type: 2}

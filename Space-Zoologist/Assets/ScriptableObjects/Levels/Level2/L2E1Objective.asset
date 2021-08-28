@@ -17,7 +17,7 @@ MonoBehaviour:
     targetPopulationCount: 1
     targetPopulationSize: 30
     timeRequirement: 0
-  - targetSpecies: {fileID: 11400000, guid: 092bd2408667e324f9b3995e5a4a2428, type: 2}
+  - targetSpecies: {fileID: 11400000, guid: b19757b4d113c9047afc67b8ca20f94e, type: 2}
     targetPopulationCount: 1
     targetPopulationSize: 30
     timeRequirement: 0

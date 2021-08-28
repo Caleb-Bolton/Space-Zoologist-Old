@@ -15,107 +15,38 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 44d06f4ffdcee4844a340c774dcfe7af, type: 2}
   speciesName: Ligurio Vermis
   species: 2
-  foodDominance: 4
   terrainTilesRequired: 4
-  growthScaleFactor: 0.1
-  growthRate: 3
-  decayRate: 5
-  range: 3
-  size: 0
-  accessibleTerrain: 010000000400000002000000
+  minFoodRequired: 6
+  maxFoodRequired: 8
+  growthRate: 4
+  decayRate: 2
+  moveCost: 0
+  size: 2
+  accessibleTerrain: 01000000040000000200000000000000
   icon: {fileID: -3508657767902738148, guid: 8b1f20dcb4d89490ba37a48668ed6fac, type: 3}
-  needsList:
-  - needType: 3
-    needs:
-    - needName: Space Maple
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 6
-      - 8
-    - needName: Berries
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 6
-      - 8
-    - needName: Ants
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 6
-      - 8
-  - needType: 0
-    needs:
-    - needName: Stone
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-    - needName: Grass
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-    - needName: Liquid
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 2
-    - needName: Swamp
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-  - needType: 4
-    needs:
-    - needName: Water
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.95
+  terrainNeeds:
+  - needName: Grass
+    isPreferred: 1
+  - needName: Stone
+    isPreferred: 0
+  - needName: Swamp
+    isPreferred: 0
+  foodNeeds:
+  - needName: Berries
+    isPreferred: 1
+  - needName: Space Maple
+    isPreferred: 0
+  - needName: Ants
+    isPreferred: 0
+  liquidNeeds:
+  - needName: 
+    tileNeedThreshold: 2
+    freshWaterMinThreshold: 0.95
+    freshWaterMaxThreshold: 1
+    saltMinThreshold: 0.005
+    saltMaxThreshold: 0.02
+    bacteriaMinThreshold: 0
+    bacteriaMaxThreshold: 0.02
+  preyNeeds:
+  - needName: Thalassius Succo
   representation: {fileID: 0}

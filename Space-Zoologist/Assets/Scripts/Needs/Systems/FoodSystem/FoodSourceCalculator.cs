@@ -106,7 +106,7 @@ public class FoodSourceCalculator : NeedCalculator
         return true;
     }
 
-    public float CalculateDistribution(Population population, float maxThreshold)
+    public float CalculateDistribution(Population population)
     {
         float foodAcquired = 0.0f;
         List<FoodSource> leastToMostContested = accessibleFoodSources[population].OrderByDescending(foodSource => localDominanceRemaining[foodSource]).ToList();
@@ -134,14 +134,6 @@ public class FoodSourceCalculator : NeedCalculator
             {
                 foodAcquired += foodToAcquire;
                 foodRemaining[foodSource] -= foodToAcquire;
-            }
-            // 3. Population has already received enough food, return any excess food and remove them from dominance of any local food
-            if (foodAcquired >= maxThreshold)
-            {
-                float excessFood = foodAcquired - maxThreshold;
-                foodAcquired = maxThreshold;
-                foodRemaining[foodSource] += excessFood;
-                break;
             }
         }
         UpdateLocalDominance(population);

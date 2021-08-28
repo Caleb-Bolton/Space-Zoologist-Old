@@ -15,112 +15,34 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 7f8be49f2a1a343cbbf0a0216ca80c08, type: 2}
   speciesName: CapraX Zeigrun
   species: 0
-  foodDominance: 3
   terrainTilesRequired: 4
-  growthScaleFactor: 0.125
-  growthRate: 3
+  minFoodRequired: 4
+  maxFoodRequired: 6
+  growthRate: 2
   decayRate: 3
-  range: 3
   moveCost: 0
-  size: 0
+  size: 3
   accessibleTerrain: 020000000100000000000000
   icon: {fileID: -2660005681641717123, guid: 69e7603fc8d1441cf8cb64f8bd8fc5a8, type: 3}
-  needsList:
-  - needType: 3
-    needs:
-    - needName: Space Maple
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-      - 6
-    - needName: Berries
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-      - 6
-    - needName: Gold Space Maple
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-      - 6
-  - needType: 0
-    needs:
-    - needName: Dirt
-      severity: 3
-      isPreferred: 1
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-    - needName: Grass
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-    - needName: Liquid
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 4
-  - needType: 4
-    needs:
-    - needName: Water
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.96
-  - needType: 8
-    needs:
-    - needName: Eligans Impar
-      severity: 3
-      isPreferred: 0
-      conditions:
-      - Condition: 0
-        Behavior: {fileID: 11400000, guid: d92755225fc454a2e8a58c01f234aa84, type: 2}
-      - Condition: 2
-        Behavior: {fileID: 11400000, guid: e13580ca2c186441ea42fcc461524b8f, type: 2}
-      thresholds:
-      - 0.96
+  terrainNeeds:
+  - needName: Dirt
+    isPreferred: 1
+  - needName: Grass
+    isPreferred: 0
+  foodNeeds:
+  - needName: Space Maple
+    isPreferred: 0
+  - needName: Berries
+    isPreferred: 0
+  - needName: Gold Space Maple
+    isPreferred: 1
+  liquidNeeds:
+  - needName: 
+    tileNeedThreshold: 2
+    freshWaterMinThreshold: 0.96
+    freshWaterMaxThreshold: 1
+    saltMinThreshold: 0.005
+    saltMaxThreshold: 0.02
+    bacteriaMinThreshold: 0
+    bacteriaMaxThreshold: 1
   representation: {fileID: 0}

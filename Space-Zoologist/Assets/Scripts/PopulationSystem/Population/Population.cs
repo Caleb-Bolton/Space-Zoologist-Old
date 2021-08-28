@@ -190,7 +190,7 @@ public class Population : MonoBehaviour, Life
     {
         if (this.PopulationBehaviorManager.ActiveBehaviors.ContainsKey(need))
         {
-            this.PopulationBehaviorManager.ActiveBehaviors[need] = this.needs[need].GetBehavior(needs[need].NeedValue).Behavior;
+            this.PopulationBehaviorManager.ActiveBehaviors[need] = null;
         }
     }
 
@@ -251,7 +251,9 @@ public class Population : MonoBehaviour, Life
             case GrowthStatus.growing:
                 if (this.GrowthCalculator.ReadyForGrowth())
                 {
-                    for (int i=0; i<(int)this.GrowthCalculator.populationIncreaseRate; i++)
+                    //GrowthCalculator.populationIncreaseRate represents what percent of the population should be added on top of the existing population
+                    float populationIncreaseAmount = AnimalPopulation.Count * this.GrowthCalculator.populationIncreaseRate;
+                    for (int i = 0; i < populationIncreaseAmount; ++i)
                     {
                         this.AddAnimal(this.gameObject.transform.position);
                     }
@@ -260,7 +262,9 @@ public class Population : MonoBehaviour, Life
             case GrowthStatus.declining:
                 if (this.GrowthCalculator.ReadyForDecay())
                 {
-                    for (int i = 0; i < (int)this.GrowthCalculator.populationIncreaseRate * -1; i++)
+                    //GrowthCalculator.populationIncreaseRate represents what percent of the population should be removed from the existing population (as a negative number)
+                    float populationDecreaseAmount = AnimalPopulation.Count * this.GrowthCalculator.populationIncreaseRate * -1;
+                    for (int i = 0; i < populationDecreaseAmount; ++i)
                     {
                         this.RemoveAnimal(this.AnimalPopulation[i]);
                     }

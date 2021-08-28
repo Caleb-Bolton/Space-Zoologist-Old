@@ -245,7 +245,7 @@ public class TerrainNeedSystem : NeedSystem
                 // 2. This population surpasses the next most-in-need population for tiles allocated
                 // 3. This population has its terrain need satisfied
                 int tileIndex = 0;
-                while(tileIndex < tileArray.Length && allocatedTilesWeighted(populationMostInNeed) < secondLeastAllocation && sumAllocatedTiles(populationMostInNeed) < tilesNeeded[populationMostInNeed])
+                while(tileIndex < tileArray.Length && allocatedTilesWeighted(populationMostInNeed) < secondLeastAllocation) //  && sumAllocatedTiles(populationMostInNeed) < tilesNeeded[populationMostInNeed]
                 {
                     if (rpm.CanAccess(populationMostInNeed, tileArray[tileIndex]))
                     {
@@ -276,14 +276,14 @@ public class TerrainNeedSystem : NeedSystem
                 foreach(Population population in populationSet)
                 {
                     string needName = tile.ToString();
-                    if (needName.Equals("Liquid"))
-                    {
-                        population.UpdateNeed(needName, rpm.GetLiquidComposition(population).Count);
-                        Debug.Log(needName + " tiles allocated to " + population.Species.SpeciesName + ": " + rpm.GetLiquidComposition(population).Count);
-                    }
-                    else if(tilesAllocated[population].ContainsKey(tile)) {
+                    // if (needName.Equals("Liquid"))
+                    // {
+                    //     population.UpdateNeed(needName, rpm.GetLiquidComposition(population).Count);
+                    //     Debug.Log(needName + " tiles allocated to " + population.Species.SpeciesName + ": " + rpm.GetLiquidComposition(population).Count);
+                    // } else 
+                    if(tilesAllocated[population].ContainsKey(tile)) {
                         population.UpdateNeed(needName, tilesAllocated[population][tile] * (tile == TileType.Grass ? 2 : 1));
-                        Debug.Log(needName + " tiles allocated to " + population.Species.SpeciesName + ": " + tilesAllocated[population][tile]);
+                        //Debug.Log(needName + " tiles allocated to " + population.Species.SpeciesName + ": " + tilesAllocated[population][tile]);
                     }
                 }
             }
@@ -292,7 +292,7 @@ public class TerrainNeedSystem : NeedSystem
         foreach (FoodSource foodSource in Consumers.OfType<FoodSource>())
         {
             int[] terrainCountsByType = new int[(int)TileType.TypesOfTiles];
-            terrainCountsByType = gridSystem.CountOfTilesInArea(gridSystem.WorldToCell(foodSource.GetPosition()), foodSource.Species.Size, foodSource.Species.RootArea);
+            terrainCountsByType = gridSystem.CountOfTilesInArea(gridSystem.WorldToCell(foodSource.GetPosition()), foodSource.Species.Size);
             // Update need values
             foreach (var (count, index) in terrainCountsByType.WithIndex())
             {
@@ -300,13 +300,13 @@ public class TerrainNeedSystem : NeedSystem
 
                 if (foodSource.GetNeedValues().ContainsKey(needName))
                 {
-                    if (needName.Equals("Liquid"))
-                    {
-                        int liquidCount = gridSystem.CountOfTilesInRange(gridSystem.WorldToCell(foodSource.GetPosition()), foodSource.Species.RootRadius)[index];
-                        //Debug.Log(foodSource.name + " updated " + needName + " with value: " + liquidCount);
-                        foodSource.UpdateNeed(needName, liquidCount);
-                        continue;
-                    }
+                    // if (needName.Equals("Liquid"))
+                    // {
+                    //     int liquidCount = gridSystem.CountOfTilesInRange(gridSystem.WorldToCell(foodSource.GetPosition()), foodSource.Species.RootRadius)[index];
+                    //     //Debug.Log(foodSource.name + " updated " + needName + " with value: " + liquidCount);
+                    //     foodSource.UpdateNeed(needName, liquidCount);
+                    //     continue;
+                    // }
                     //Debug.Log(foodSource.name + " updated " + needName + " with value: " + count);
                     foodSource.UpdateNeed(needName, count);
                 }
